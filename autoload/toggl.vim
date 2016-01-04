@@ -68,7 +68,7 @@ function! s:get_pid(project_name) abort
       return p.id
     endif
   endfor
-  echo 'Project "' . a:project_name . '" does not found.'
+  echo 'Project "' . a:project_name . '" was not found.'
   return 0
 endfunction
 
