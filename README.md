@@ -3,12 +3,25 @@ toggl.vim
 
 Toggl client for vimscript and vim.
 
+Dependences
+-----------
+
+- vital.vim
+- unite.vim (optional)
+
 Usage
 -----
 Set your [API token](https://github.com/toggl/toggl_api_docs#api-token)
 
 ```vim
 let g:toggl_api_token = "b51ff78xxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+Set your [workspace ID](https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md) (optional)
+*Note: If you don't set this, toggl.vim will default to your first workspace*
+
+```vim
+let g:toggl_workspace_id = 987654321
 ```
 
 Start task
