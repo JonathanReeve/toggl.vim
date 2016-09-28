@@ -16,6 +16,12 @@ function! s:parse_args(args) abort
       let result.project = s[1:]
     elseif s[0] == "@"
       call add(result.tags, s[1:])
+    elseif s[0:3] == "due:"
+      echo 'Ignoring due date.' 
+    elseif s == result.words[0] && s[0] == "("
+      echo 'Ignoring priority.' 
+    elseif s == result.words[1] && match(s, '\d\{4\}-\d\{2\}-\d\{2\}') == 0
+      echo 'Ignoring date.' 
     else
       call add(result.args, s)
     endif
@@ -24,7 +30,15 @@ function! s:parse_args(args) abort
 endfunction
 
 function! toggl#start(args) abort
-  let args = s:parse_args(a:args)
+  " By running `:StartToggl .`, this will parse the current line and start it
+  " in Toggl. 
+  if a:args == '.'
+    let line=getline('.')
+    echo 'Using current line as task.' 
+    let args = s:parse_args(line)
+  else
+    let args = s:parse_args(a:args)
+  endif
   if has_key(args, "project")
     let pid = s:get_pid(args.project)
   else
